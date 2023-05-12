@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<project name="Lab3" default="compile" basedir=".">
+    <property file="build.properties"/>
+
+    <path id="lib.path">
+        <fileset dir="${lib.dir}" includes="*.jar"/>
+    </path>
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="lib/ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+
+    <target name="compile" description="компиляция исходных кодов проекта">
+        <echo>Compilation..</echo>
+        <mkdir dir="${build.dir}"/>
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.dir}">
+            <classpath refid="lib.path"/>
+        </javac>
+        <echo>Compilation success!</echo>
+    </target>
+
+    <target name="build" depends="compile" description="упаковка скомпилированных файлов в исполняемый jar-архив">
+        <echo>Building..</echo>
+        <mkdir dir="${dist.dir}"/>
+        <jar basedir="${build.dir}" destfile="${dist.dir}/${ant.project.name}.jar">
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}"/>
+                <attribute name="Class-Path" value="lib/"/>
+                <attribute name="Implementation-Version" value="1.0"/>
+            </manifest>
+        </jar>
+        <echo>Building success!</echo>
+    </target>
+
+    <target name="clean" description="удаление скомпилированных классов проекта и всех временных файлов">
+        <echo>Cleaning..</echo>
+        <delete dir="${build.dir}"/>
+        <echo>Cleaning done!</echo>
+    </target>
+
+    <target name="test" depends="compile" description="запуск junit-тестов проекта">
+        <echo>Testing..</echo>
+        <mkdir dir="${report.dir}"/>
+        <junit printsummary="yes" fork="true" haltonfailure="no">
+            <classpath>
+                <pathelement location="${build.dir}"/>
+            </classpath>
+            <classpath refid="lib.path"/>
+
+            <formatter type="plain"/>
+            <batchtest todir="${report.dir}">
+                <fileset dir="${build.dir}">
+                    <include name="**/*Test*.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+        <echo>Testing complete!</echo>
+    </target>
+
+    <target name="xml">
+        <xmlvalidate failonerror="no" lenient="on">
+            <fileset dir="./" includes="**/*.xml"/>
+        </xmlvalidate>
+    </target>
+
+    <target name="history" depends="compile">
+        <!--        svn log -q | grep 'r*' | head -n -1     -->
+
+        <exec executable="svn" output="temp">
+            <arg value="log"/>
+            <arg value="-q"/>
+        </exec>
+
+        <exec executable="grep" input="temp" output="temp">
+            <arg value="'r*'"/>
+        </exec>
+
+        <exec executable="head" input="temp" outputproperty="history.commits.grep">
+            <arg value="-n"/>
+            <arg value="-2"/>
+        </exec>
+
+        <!--        go to previous working version-->
+
+        <exec executable="svn">
+            <arg value="update"/>
+            <arg value="-r"/>
+            <arg value="PREV"/>
+        </exec>
+
+        <for list="${history.commits.grep}" delimiter="&#10;" param="p" keepgoing="${keepgoing}">
+
+            <sequential>
+                <if>
+                    <istrue value="${keepgoing}"/>
+                    <then>
+                        <echo message="ddddddd"/>
+                        <trycatch>
+                            <try>
+                                <echo message="-------------------"/>
+                                <echo message="--- TRY COMPILE ---"/>
+                                <echo message="-------------------"/>
+
+                                <antcall target="compile"/>
+                                <var name="keepgoing" value="false"/>
+
+                                <echo message="----------------"/>
+                                <echo message="--- COMPILED ---"/>
+                                <echo message="-----------------"/>
+                            </try>
+                            <catch>
+                                <echo message="----------------------------"/>
+                                <echo message="--- SETTING PREV VERSION ---"/>
+                                <echo message="----------------------------"/>
+
+                                <echo message="bim bom"/>
+                                <exec executable="svn">
+                                    <arg value="update"/>
+                                    <arg value="-r"/>
+                                    <arg value="PREV"/>
+                                </exec>
+
+                                <echo message="---------------------------"/>
+                                <echo message="--- PREV VERSION IS SET ---"/>
+                                <echo message="---------------------------"/>
+                            </catch>
+                        </trycatch>
+
+                    </then>
+                </if>
+
+            </sequential>
+        </for>
+
+        <exec executable="svn" output="diff.txt">
+            <arg value="diff"/>
+            <arg value="-r"/>
+            <arg value="PREV"/>
+        </exec>
+
+    </target>
+
+</project>
