@@ -17,20 +17,36 @@ public class Point implements Serializable {
 
     public Point() { }
 
-    private boolean checkTriangle() {
+    public boolean validateX() {
+        return Math.abs(xValue) <= 4.0;
+    }
+
+    public boolean validateY() {
+        return yValue >= -5.0 && yValue <= 3.0;
+    }
+
+    public boolean validateR() {
+        return rValue == 1.0 || rValue == 1.5 || rValue == 2.0 || rValue == 2.5 || rValue == 3.0;
+    }
+
+    public boolean validateValue() {
+        return validateR() && validateY() && validateX();
+    }
+    
+    public boolean checkTriangle() {
         return xValue <= 0 && yValue <= 0 && yValue >= (-xValue / 2 - rValue / 2);
     }
 
-    private boolean checkRectangle() {
+    public boolean checkRectangle() {
         return xValue >= 0 && yValue <= 0 && xValue <= rValue && yValue >= -rValue;
     }
 
-    private boolean checkCircle() {
+    public boolean checkCircle() {
         return xValue >= 0 && yValue >= 0 && xValue * xValue + yValue * yValue <= rValue * rValue;
     }
 
     public void checkHit() {
-        hitResult = checkTriangle() || checkRectangle() || checkCircle();
+        hitResult = validateValue() && (checkTriangle() || checkRectangle() || checkCircle());
     }
 
     public Long getId() {

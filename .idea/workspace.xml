@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cf1029a8-aa17-47eb-8561-fe7b844d37ac" name="Changes" comment="" />
+    <list default="true" id="cf1029a8-aa17-47eb-8561-fe7b844d37ac" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/test/ZoneTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/artifacts/Lab3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/output/artifacts/Lab3.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/classes/data/Point.class" beforeDir="false" afterPath="$PROJECT_DIR$/output/classes/data/Point.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/classes/test/FTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/data/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/data/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/test/FTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ValidTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +24,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/build.xml" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -24,6 +37,7 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2PbYD18kGlEMBMOej12xlp035U2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -70,12 +84,24 @@
       <updated>1683727125110</updated>
       <workItem from="1683727126476" duration="6953000" />
       <workItem from="1683815409444" duration="7051000" />
-      <workItem from="1683899871000" duration="4197000" />
+      <workItem from="1683899871000" duration="5505000" />
+      <workItem from="1684059978586" duration="6226000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
